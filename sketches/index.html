@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Mouse Position</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+    <script>
+
+      var socket = io();
+
+      function setup() {
+        createCanvas(600, 600);
+        background(220);
+      }
+
+      function draw() {
+        // noStroke();
+        if (mouseIsPressed) {
+          line(mouseX,mouseY,pmouseX,pmouseY);
+          console.log(mouseX, mouseY);
+
+          socket.emit('position',{
+            x : mouseX,
+            y : mouseY
+          });
+
+          // socket.emit('positionNormalised',{
+          //   x : mouseX / width,
+          //   y : mouseY / height
+          // });
+
+          // socket.emit('positionNormalised',{
+          //   x : 1,
+          //   y : 1
+          // });
+        }
+      }
+
+      function mousePressed() {
+        socket.emit('penDown', true);
+      }
+
+      function mouseReleased() {
+        socket.emit('penDown', false);
+      }
+
+    </script>
+  </body>
+</html>

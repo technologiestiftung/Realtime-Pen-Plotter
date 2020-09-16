@@ -1,0 +1,11 @@
+{
+  "version": "0.1.0",
+  "scripts": {
+    "start": "node plotter-server.js"
+  },
+  "dependencies": {
+    "serialport": "~9.0.0",
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3"
+  }
+}
