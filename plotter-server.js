@@ -15,6 +15,13 @@ const dimensions = {
 
 let serialPort
 try {
+  SerialPort.list().then((ports) => {
+    ports.forEach((port) => {
+      console.log(port.path);
+    });
+  });
+  console.log(" ")
+
   serialPort = new SerialPort('/dev/tty.usbmodem142401', {
     baudRate: 115200
   })
