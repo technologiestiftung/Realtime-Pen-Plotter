@@ -35,6 +35,10 @@ app.use(express.static('sketches'))
 io.on('connection', function(socket){
   socket.on('position', function(msg){
     // console.log(msg)
+    if (msg.x < 0) msg.x = 0;
+    if (msg.x > dimensions.x) msg.x = dimensions.x;
+    if (msg.y < 0) msg.y = 0;
+    if (msg.y > dimensions.y) msg.y = dimensions.y;
 
     const scale = 1
     const command = "G90 X" + (msg.x * scale) + " Y" + (msg.y * scale) + "\n"
@@ -47,6 +51,10 @@ io.on('connection', function(socket){
 
   socket.on('positionNormalised', function(msg){
     // console.log(msg)
+    if (msg.x < 0) msg.x = 0;
+    if (msg.x > 1) msg.x = 1;
+    if (msg.y < 0) msg.y = 0;
+    if (msg.y > 1) msg.y = 1;
 
     const command = "G90 X" + (msg.x * dimensions.x) + " Y" + (msg.y * dimensions.y) + "\n"
     console.log(command)
