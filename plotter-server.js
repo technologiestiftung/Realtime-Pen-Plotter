@@ -22,7 +22,7 @@ try {
   });
   console.log(" ")
 
-  serialPort = new SerialPort('/dev/tty.usbmodem142401', {
+  serialPort = new SerialPort('/dev/ttyAMA0', {
     baudRate: 115200
   })
   const parser = serialPort.pipe(new Readline({ delimiter: '\r\n' }))
